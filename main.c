@@ -28,7 +28,13 @@ void tim2_setup(void)
     TIM2->PSC = 1; // clear prescaler
     TIM2->ARR = 4000; // set period (Auto Reload Register)
 
-    TIM2->CR2 &= (uint16_t)~TIM_CR2_MMS; // 
+    // this clears the bits, obviously nothing else sets the bits in here, but
+    // it couldn't hurt to think about it
+    TIM2->CR2 &= (uint16_t)~TIM_CR2_MMS;
+
+    // this sets the TRGO (trigger output) behavior for slaving other timers
+    // or other peripherals (like the dac) to this timer. 0x20 means the trigger
+    // signal occurs on every timer update (every single time the counter changes value)
     TIM2->CR2 |= 0x20; 
 
     // configure capture/compare 1

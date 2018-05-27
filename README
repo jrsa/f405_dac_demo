@@ -1,0 +1,7 @@
+simple use case of the built in dac on the STM32F405RG. no data is sent to the dac, instead the "waveform generation" feature is used, in this case generating noise with an LFSR algorithm (part of the dac hardware.)
+
+the dac setup portion should be easily portable to other F4 chips. the timer setup code is written without the StdPeriph library, just for amusement :)
+
+the dac waveform generator will update the sample after receiving a "trigger" signal from the timer (TIM2) which is configured to send said trigger signal when the timer advances (as opposed to when the timer auto-resets.) therefore all this code is set up the hardware in the chip and say go.
+
+the led on the nucleo board is set up (PA5) but not used, that part of the code can be ignored.
